@@ -11,15 +11,16 @@ jobs:
   deploy-app:
     name: Deploy Application
     runs-on: ubuntu-latest
-    environment: ${{ github.ref_name }} 
+    environment: ${{ github.sha }} 
     outputs:
       result: ${{ steps.deploy.outputs.result }}
     steps:
       - name: Deploy application
         id: deploy
         run: |
-          echo "🚀 Deploying to ${{ github.ref_name }} environment..."
+          echo "🚀 Deploying to ${{ github.sha }} environment..."
           echo "📦 Image: workshop-app:${{ github.sha }}"
-          echo "🌐 URL: https://workshop-app-${{ github.ref_name }}.example.com"
+          echo "🌐 URL: https://workshop-app-${{ github.sha }}.example.com" 
+          # make human-friendly over SHA
           echo "result=deployed" >> "$GITHUB_OUTPUT"
           echo "✅ Deployment complete!"
